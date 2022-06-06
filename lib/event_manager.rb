@@ -75,19 +75,19 @@ end
 def convert_index_to_day(index)
   case index
   when 0
-    "Sunday"
+    'Sunday'
   when 1
-    "Monday"
+    'Monday'
   when 2
-    "Tuesday"
+    'Tuesday'
   when 3
-    "Wednesday"
+    'Wednesday'
   when 4
-    "Thursday"
+    'Thursday'
   when 5
-    "Friday"
+    'Friday'
   when 6
-    "Saturday"
+    'Saturday'
   end
 end
 
@@ -114,7 +114,7 @@ contents.each do |row|
   day_index_array[extract_day_index(row[:regdate])] += 1
   form_letter = erb_template.result(binding)
 
-  save_thank_you_letter(id,form_letter)
+  save_thank_you_letter(id, form_letter)
 end
 
 display_peak_hour(hour_index_array)
