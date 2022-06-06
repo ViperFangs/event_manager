@@ -91,7 +91,7 @@ def convert_index_to_day(index)
   end
 end
 
-puts 'EventManager initialized.'
+puts "\nEventManager initialized."
 
 contents = CSV.open(
   'event_attendees.csv',
@@ -117,5 +117,12 @@ contents.each do |row|
   save_thank_you_letter(id, form_letter)
 end
 
+puts "\nAll the Files have been imported to the output file in the main directory!\n\n"
+puts "*__________________________________________________________*"
+puts
 display_peak_hour(hour_index_array)
+puts
 display_peak_day(day_index_array)
+puts
+puts "*__________________________________________________________*"
+puts
