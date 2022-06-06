@@ -36,7 +36,10 @@ end
 # end
 
 def clean_phone_number(phone_number)
-  p phone_number
+  phone_number = phone_number.tr(" .//()-", '')
+  phone_number = phone_number[1..10] if phone_number.length == 11 && phone_number[0] == 1
+  phone_number = '' unless phone_number.length.eql? 10
+  phone_number = phone_number.rjust(10, '0') 
 end
 
 puts 'EventManager initialized.'
@@ -55,9 +58,9 @@ contents.each do |row|
   name = row[:first_name]
   zipcode = clean_zipcode(row[:zipcode])
   legislators = legislators_by_zipcode(zipcode)
-  clean_phone_number(row[:HomePhone])
+  homephone = clean_phone_number(row[:homephone])
 
-  form_letter = erb_template.result(binding)
+  #form_letter = erb_template.result(binding)
 
-  save_thank_you_letter(id,form_letter)
+  #save_thank_you_letter(id,form_letter)
 end
