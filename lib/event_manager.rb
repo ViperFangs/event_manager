@@ -50,6 +50,17 @@ def extract_hour(string)
   Time.strptime(string, '%m/%d/%y %H:%M').hour
 end
 
+def display_peak_hour(array)
+  peak_registration_hour = array.max
+  peak_hour_array = []
+
+  array.each_with_index do |hour_count, hour|
+    peak_hour_array.push("Hour #{hour}:00") if hour_count == peak_registration_hour
+  end
+
+  puts "The peak registration hours are #{peak_hour_array.join(', ')}"
+end
+
 puts 'EventManager initialized.'
 
 contents = CSV.open(
@@ -60,16 +71,20 @@ contents = CSV.open(
 
 template_letter = File.read('form_letter.erb')
 erb_template = ERB.new template_letter
-peak_hours_array = Array.new(24, 0)
+hour_index_array = Array.new(24, 0)
+day_index_hour = Array.new(7, 0)
 
 contents.each do |row|
-  id = row[0]
-  name = row[:first_name]
-  zipcode = clean_zipcode(row[:zipcode])
-  legislators = legislators_by_zipcode(zipcode)
-  homephone = clean_phone_number(row[:homephone])
-  peak_hours_array[extract_hour(row[:regdate])] += 1
+  #id = row[0]
+  #name = row[:first_name]
+  #zipcode = clean_zipcode(row[:zipcode])
+  #legislators = legislators_by_zipcode(zipcode)
+  #homephone = clean_phone_number(row[:homephone])
+  hour_index_array[extract_hour(row[:regdate])] += 1
+  day_index_hour[extract_day(row[:regdate])] += 1
   # form_letter = erb_template.result(binding)
 
   # save_thank_you_letter(id,form_letter)
 end
+
+display_peak_hour(hour_index_array)
