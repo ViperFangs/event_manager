@@ -105,16 +105,16 @@ hour_index_array = Array.new(24, 0)
 day_index_array = Array.new(7, 0)
 
 contents.each do |row|
-  #id = row[0]
-  #name = row[:first_name]
-  #zipcode = clean_zipcode(row[:zipcode])
-  #legislators = legislators_by_zipcode(zipcode)
-  #homephone = clean_phone_number(row[:homephone])
+  id = row[0]
+  name = row[:first_name]
+  zipcode = clean_zipcode(row[:zipcode])
+  legislators = legislators_by_zipcode(zipcode)
+  homephone = clean_phone_number(row[:homephone])
   hour_index_array[extract_hour_index(row[:regdate])] += 1
   day_index_array[extract_day_index(row[:regdate])] += 1
-  # form_letter = erb_template.result(binding)
+  form_letter = erb_template.result(binding)
 
-  # save_thank_you_letter(id,form_letter)
+  save_thank_you_letter(id,form_letter)
 end
 
 display_peak_hour(hour_index_array)
